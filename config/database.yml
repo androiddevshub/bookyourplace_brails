@@ -20,6 +20,9 @@ default: &default
   # For details on connection pooling, see Rails configuration guide
   # http://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  timeout: 5000
+  username: postgres
+  password: shubham
 
 development:
   <<: *default
@@ -58,7 +61,8 @@ development:
 test:
   <<: *default
   database: bookyourplace_brails_test
-
+  username: postgres
+  password: shubham
 # As with config/secrets.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
 # ever seen by anyone, they now have access to your database.
@@ -82,4 +86,4 @@ production:
   <<: *default
   database: bookyourplace_brails_production
   username: bookyourplace_brails
-  password: <%= ENV['BOOKYOURPLACE_BRAILS_DATABASE_PASSWORD'] %>
+  password: shubham

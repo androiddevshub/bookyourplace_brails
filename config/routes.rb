@@ -7,5 +7,5 @@ Rails.application.routes.draw do
   get 'test', to: 'test#test'
   get 'api/places', to: 'place#show'
   get 'api/users', to: 'test#testuser'
-  post 'api/user_verify', to: 'verify#verify_user'
+  post 'api/verify_email_user', to: 'verify#verify_user'
 end

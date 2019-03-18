@@ -32,7 +32,7 @@ class PasswordsController < Devise::PasswordsController
         render json: { errors: 'Please enter valid OTP' }, status: :bad_request
       end
     else
-      render json: { errors: 'No user registered with this email.' }, status: :bad_request
+      render json: { errors: 'This is not registered account' }, status: :bad_request
     end
   end
 

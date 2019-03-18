@@ -6,7 +6,7 @@ class VerifyController < ApplicationController
       if User.find(user.id).update(verified: 1)
         render json: { message: 'Successfully verified.' }, status: :ok
       else
-        render json: { message: 'Something went wrong' }, status: :bad_request
+        render json: { message: 'Oh hoo! Something went wrong' }, status: :bad_request
       end
     else
       render json: { message: 'Please enter a valid OTP' }, status: :bad_request

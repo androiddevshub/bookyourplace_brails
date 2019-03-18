@@ -20,7 +20,7 @@ class SessionsController < Devise::SessionsController
         token = AuthToken.issue_token({ user_id: user.id })
         render json: { message: 'Signed in successfully', auth_token: token }, status: :ok
       else
-        render json: { errors: 'email or password is invalid' }, status: :bad_request
+        render json: { errors: 'Email or password is invalid' }, status: :bad_request
       end
     else
       render json: { errors: 'Please verify your account.' }, status: :bad_request

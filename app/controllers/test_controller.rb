@@ -1,9 +1,14 @@
 class TestController < ApplicationController
 
-  before_action :verify_jwt_token
+  # before_action :verify_jwt_token
 
-  def test
-    render json: { message: 'dwf'}
+  def testplace
+    render json: { data: Place.all }
   end
+
+  def testuser
+    render json: { data: User.all }
+  end
+
 
 end

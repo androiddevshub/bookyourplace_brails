@@ -11,7 +11,12 @@ class RegistrationsController < Devise::RegistrationsController
     if resource.persisted?
       if resource.active_for_authentication?
         sign_up(resource_name, resource)
-        render json: { user: resource.as_json(only: [:id, :email, :phone]), message: 'signed up successfully' }, status: :created
+        @otp = rand.to_s[2..6]
+        if User.find(resource.id).update(otp: @otp)
+          UserMailer.send_verify_mail(resource, @otp).deliver
+          render json: { user: resource.as_json(only: [:id, :email, :phone]), message: 'signed up successfully' }, status: :created
+        else
+        end
       else
         expire_data_after_sign_in!
         render json: { user: resource.as_json(only: [:id, :email, :phone]), message: 'signed up but inactive' }, status: :forbidden

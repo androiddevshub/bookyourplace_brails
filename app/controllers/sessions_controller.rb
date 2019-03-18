@@ -15,13 +15,15 @@ class SessionsController < Devise::SessionsController
 
   def create
     user = User.find_by_email(sign_in_params[:email])
-    if user && user.valid_password?(sign_in_params[:password])
-
-      token = AuthToken.issue_token({ user_id: user.id })
-
-      render json: { message: 'Signed in successfully', auth_token: token }, status: :ok
+    if user.verified == 1
+      if user && user.valid_password?(sign_in_params[:password])
+        token = AuthToken.issue_token({ user_id: user.id })
+        render json: { message: 'Signed in successfully', auth_token: token }, status: :ok
+      else
+        render json: { errors: 'email or password is invalid' }, status: :bad_request
+      end
     else
-      render json: { errors: 'email or password is invalid' }, status: :bad_request
+      render json: { errors: 'Please verify your account.' }, status: :bad_request
     end
   end
 

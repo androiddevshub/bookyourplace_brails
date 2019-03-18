@@ -21,21 +21,21 @@ default: &default
   # http://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
-  username: postgres
-  password: shubham
+  username: shubham
+  password: qwerty12345
 
 development:
   <<: *default
-  database: bookyourplace
+  database: bookyourplace_brails_development
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
   # When left blank, postgres will use the default role. This is
   # the same name as the operating system user that initialized the database.
-  username: postgres
+  username: shubham
 
   # The password associated with the postgres role (username).
-  password: shubham
+  password: qwerty12345
 
   # Connect on a TCP socket. Omitted by default since the client uses a
   # domain socket that doesn't need configuration. Windows does not have
@@ -61,8 +61,8 @@ development:
 test:
   <<: *default
   database: bookyourplace_brails_test
-  username: postgres
-  password: shubham
+  username: shubham
+  password: qwerty12345
 # As with config/secrets.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
 # ever seen by anyone, they now have access to your database.
@@ -86,4 +86,4 @@ production:
   <<: *default
   database: bookyourplace_brails_production
   username: bookyourplace_brails
-  password: shubham
+  password: 1q2w3e4r

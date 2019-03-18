@@ -7,9 +7,10 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.2]
       t.string :email,              null: false, default: ""
       t.string :encrypted_password, null: false, default: ""
       t.string :phone, null: false, default: ""
-      t.string :otp, null: false, default: ""
+      t.string :otp
       t.string :name, null: false, default: ""
       t.string :profile_pic
+      t.integer :verified
 
       ## Recoverable
       t.string   :reset_password_token
@@ -25,7 +26,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.2]
       # t.inet     :current_sign_in_ip
       # t.inet     :last_sign_in_ip
 
-    
+
       ## Lockable
       # t.integer  :failed_attempts, default: 0, null: false # Only if lock strategy is :failed_attempts
       # t.string   :unlock_token # Only if unlock strategy is :email or :both

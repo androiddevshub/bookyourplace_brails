@@ -6,7 +6,7 @@ class PasswordsController < Devise::PasswordsController
      @otp = rand.to_s[2..6]
      if User.find(@user.id).update(otp: @otp)
        ResetMailer.reset_password_mail(@user, @otp).deliver_now!
-       render json: { message: 'Please check your email to reset password.' }, status: :ok
+       render json: { message: 'Please check your email to reset your password.' }, status: :ok
      else
        render json: { errors: 'Something went wrong' }, status: :bad_request
      end

@@ -11,7 +11,7 @@ class SessionsController < Devise::SessionsController
         if @user && @user.valid_password?(sign_in_params[:password])
           token = AuthToken.issue_token({ user_id: @user.id })
           if @user.update(session_id: token)
-            render json: { message: 'Signed in successfully',user: @user.as_json(only: [:id, :name, :email, :phone, :session_id])}, status: :ok
+            render json: { message: 'Signed in successfully, Please verify your account',user: @user.as_json(only: [:id, :name, :email, :phone, :session_id])}, status: :ok
           else
             render json: { errors: 'Something went wrong' }, status: :bad_request
           end

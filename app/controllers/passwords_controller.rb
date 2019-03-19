@@ -29,7 +29,7 @@ class PasswordsController < Devise::PasswordsController
             if @user.save
               render json: { message: 'Password reset successfully.' }, status: :created
             else
-              render json: { errors: 'Something went wrong' }, status: :internal_server_error
+              render json: { errors: 'Oh Hoo! I think something went wrong' }, status: :internal_server_error
             end
           else
             render json: { errors: 'Something went wrong' }, status: :internal_server_error

@@ -5,7 +5,7 @@ class SessionsController < Devise::SessionsController
   respond_to :json
 
   def create
-    user = User.find_by_email(sign_in_params[:email])
+    user = User.find_by(email: params[:email])
     if user.verified == 1
       if user && user.valid_password?(sign_in_params[:password])
         token = AuthToken.issue_token({ user_id: user.id })

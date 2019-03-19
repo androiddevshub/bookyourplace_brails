@@ -2,15 +2,6 @@ class SessionsController < Devise::SessionsController
 
   require 'auth_token'
 
-  # Disable CSRF protection
-  # skip_before_action :verify_authenticity_token
-
-
-  # Disable CSRF protection
-  # protect_from_forgery
-  # skip_before_action :verify_authenticity_token
-
-  # Be sure to enable JSON.
   respond_to :json
 
   def create
@@ -18,9 +9,13 @@ class SessionsController < Devise::SessionsController
     if user.verified == 1
       if user && user.valid_password?(sign_in_params[:password])
         token = AuthToken.issue_token({ user_id: user.id })
-        render json: { message: 'Signed in successfully', auth_token: token }, status: :ok
+        if user.update(session_id: token)
+          render json: { message: 'Signed in successfully',user: user.as_json(only: [:id, :name, :email, :phone, :session_id])}, status: :ok
+        else
+          render json: { errors: 'Something went wrong' }, status: :bad_request
+        end
       else
-        render json: { errors: 'email or password is invalid' }, status: :bad_request
+        render json: { errors: 'Email or password is invalid' }, status: :bad_request
       end
     else
       render json: { errors: 'Please verify your account.' }, status: :bad_request

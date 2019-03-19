@@ -4,7 +4,7 @@ class UserMailer < ApplicationMailer
     @user = user
     @name = @user.name
     @otp = otp
-    mail to: @user.email , from: "support@bookyourplace.com", subject: "Reset Password Mail"
+    mail to: @user.email , from: "support@bookyourplace.com", subject: "Account Verification Mail"
   end
 
 end

@@ -6,7 +6,7 @@ class SessionsController < Devise::SessionsController
 
   def create
     user = User.find_by(email: params[:email])
-    if user.verified == 1
+    if user.verified == "1"
       if user && user.valid_password?(sign_in_params[:password])
         token = AuthToken.issue_token({ user_id: user.id })
         if user.update(session_id: token)

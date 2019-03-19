@@ -33,8 +33,7 @@ ActiveRecord::Schema.define(version: 2019_03_13_075042) do
     t.string "otp"
     t.string "name", default: "", null: false
     t.string "profile_pic"
-    t.integer "verified"
-    t.string "session_id"
+    t.string "verified", default: "0"
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"

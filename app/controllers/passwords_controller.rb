@@ -1,17 +1,21 @@
 class PasswordsController < Devise::PasswordsController
 
   def create
-    @user = User.find_by_email(params[:user][:email])
-    if @user.verified === "1"
-     @otp = rand.to_s[2..6]
-     if User.find(@user.id).update(otp: @otp)
-       ResetMailer.reset_password_mail(@user, @otp).deliver_now!
-       render json: { message: 'Please check your email to reset password.' }, status: :ok
-     else
-       render json: { errors: 'Something went wrong' }, status: :bad_request
-     end
+    @user = User.find_by_email(params[:email])
+    if @user.present?
+      if @user.verified == "1"
+       @otp = rand.to_s[2..6]
+       if User.find(@user.id).update(otp: @otp)
+         ResetMailer.reset_password_mail(@user, @otp).deliver_now!
+         render json: { message: 'Please check your email to reset password.' }, status: :ok
+       else
+         render json: { errors: 'Something went wrong' }, status: :bad_request
+       end
+      else
+        render json: { errors: 'Please verify your account first.' }, status: :bad_request
+      end
     else
-      render json: { errors: 'Please verify your account first.' }, status: :bad_request
+      render json: { errors: 'No such user existed' }, status: :bad_request
     end
   end
 

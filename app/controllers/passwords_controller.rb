@@ -21,7 +21,12 @@ class PasswordsController < Devise::PasswordsController
       if @user.otp == params[:user][:otp]
         if params[:user][:password] == params[:user][:confirm_password]
           if @user.update(password: params[:user][:password])
-            render json: { message: 'Password reset successfully.' }, status: :created
+            @user.otp = nil
+            if @user.save
+              render json: { message: 'Password reset successfully.' }, status: :created
+            else
+              render json: { errors: 'Something went wrong' }, status: :internal_server_error
+            end
           else
             render json: { errors: 'Something went wrong' }, status: :internal_server_error
           end

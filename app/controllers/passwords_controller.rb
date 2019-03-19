@@ -2,7 +2,7 @@ class PasswordsController < Devise::PasswordsController
 
   def create
     @user = User.find_by_email(params[:user][:email])
-    if @user.verified == "1"
+    if @user.verified === "1"
      @otp = rand.to_s[2..6]
      if User.find(@user.id).update(otp: @otp)
        ResetMailer.reset_password_mail(@user, @otp).deliver_now!
@@ -19,7 +19,7 @@ class PasswordsController < Devise::PasswordsController
     @user = User.find_by(email: params[:user][:email])
     if @user.present?
       if @user.otp == params[:user][:otp]
-        if params[:user][:password] == params[:user][:confirm_password]
+        if params[:user][:password] === params[:user][:confirm_password]
           if @user.update(password: params[:user][:password])
             @user.otp = nil
             if @user.save

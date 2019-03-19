@@ -10,7 +10,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.2]
       t.string :otp
       t.string :name, null: false, default: ""
       t.string :profile_pic
-      t.integer :verified, default: "1"
+      t.integer :verified, default: "0"
 
       ## Recoverable
       t.string   :reset_password_token

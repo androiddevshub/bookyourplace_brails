@@ -23,16 +23,16 @@ class PasswordsController < Devise::PasswordsController
     @user = User.find_by(email: params[:user][:email])
     if @user.present?
       if @user.otp == params[:user][:otp]
-        if params[:user][:password] === params[:user][:confirm_password]
+        if params[:user][:password] == params[:user][:confirm_password]
           if @user.update(password: params[:user][:password])
             @user.otp = nil
             if @user.save
               render json: { message: 'Password reset successfully.' }, status: :created
             else
-              render json: { errors: 'Something went wrong' }, status: :internal_server_error
+              render json: { errors: 'Something went wrong' }, status: :bad_request
             end
           else
-            render json: { errors: 'Something went wrong' }, status: :internal_server_error
+            render json: { errors: 'Something went wrong' }, status: :bad_request
           end
         else
           render json: { errors: 'Passwords do not match' }, status: :bad_request

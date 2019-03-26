@@ -13,7 +13,7 @@ class SessionsController < Devise::SessionsController
           if @user.update(session_id: token)
             render json: { message: 'Signed in successfully',user: @user.as_json(only: [:id, :name, :email, :phone, :session_id])}, status: :ok
           else
-            render json: { errors: 'Something went wrong' }, status: :bad_request
+            render json: { errors: @user.errors.full_messages }, status: :bad_request
           end
         else
           render json: { errors: 'Email or password is invalid' }, status: :bad_request

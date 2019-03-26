@@ -12,10 +12,11 @@ class RegistrationsController < Devise::RegistrationsController
       if resource.active_for_authentication?
         sign_up(resource_name, resource)
         @otp = rand.to_s[2..6]
-        if User.find(resource.id).update(otp: @otp)
+        if resource.update(otp: @otp)
           UserMailer.send_verify_mail(resource, @otp).deliver
           render json: { user: resource.as_json(only: [:id, :email, :phone]), message: 'signed up successfully' }, status: :created
         else
+          render json: { errors: resource.errors }, status: :bad_request
         end
       else
         expire_data_after_sign_in!

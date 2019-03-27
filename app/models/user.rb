@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  has_many :bookings
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
@@ -12,6 +13,5 @@ class User < ApplicationRecord
 
   validates :phone, uniqueness: true, presence: true, length: { is: 10 },
           format: { with: REGEX_PHONE, message: I18n.t('errors.phone') }
-
-
+          
 end

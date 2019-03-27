@@ -10,10 +10,40 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_13_075042) do
+ActiveRecord::Schema.define(version: 2019_03_26_214216) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "bookings", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "hotel_id", null: false
+    t.string "booking_startdate", default: "", null: false
+    t.string "booking_enddate", default: "", null: false
+    t.string "booking_cprice", default: "", null: false
+    t.string "booking_adults", default: "", null: false
+    t.string "booking_children", default: "", null: false
+    t.string "booking_rooms", default: "", null: false
+    t.string "booking_username", default: "", null: false
+    t.string "booking_useremail", default: "", null: false
+    t.datetime "deleted_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["hotel_id"], name: "index_bookings_on_hotel_id"
+    t.index ["user_id"], name: "index_bookings_on_user_id"
+  end
+
+  create_table "hotels", force: :cascade do |t|
+    t.string "hotel_name", default: "", null: false
+    t.string "hotel_location", default: "", null: false
+    t.string "hotel_lat", default: "", null: false
+    t.string "hotel_long", default: "", null: false
+    t.string "hotel_price", default: "", null: false
+    t.string "hotel_rooms", default: "", null: false
+    t.jsonb "hotel_images", default: "", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "places", force: :cascade do |t|
     t.string "place_name", default: "", null: false

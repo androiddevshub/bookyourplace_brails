@@ -70,4 +70,13 @@ class BookingController < ApplicationController
     end
   end
 
+  def book
+    user = User.find_by(session_id: request.headers['session-id'])
+    if user.present?
+
+    else
+      render json: { errors: 'Invalid session id' }, status: :bad_request
+    end
+  end
+
 end

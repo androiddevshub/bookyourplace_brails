@@ -11,7 +11,7 @@ class User < ApplicationRecord
   validates :password, length: { in: 8..16 }, format: { with: REGEX_PASSWORD,
           message: I18n.t('errors.password') } , if: :encrypted_password_changed?
 
-  validates :phone, uniqueness: true, presence: true, length: { is: 15 },
+  validates :phone, uniqueness: true, presence: true, length: { is: 14 },
           format: { with: REGEX_PHONE, message: I18n.t('errors.phone') }
 
 end

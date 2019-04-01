@@ -82,14 +82,13 @@ class BookingController < ApplicationController
       @adults = params[:adults]
       @children = params[:children]
       hotel = Hotel.find_by(id: params[:id])
-      p = Float(@adults)/2
-      value = p.round
+      value = (Float(@adults)/2).round
       @price = hotel.hotel_price.to_i * value
       if @children > value
         @price = @price + (@children - value) * (30 * hotel.hotel_price.to_i)/100
       end
       if @rooms < value
-        render json: { message: "Please increase the no of rooms" }, status: :ok
+        render json: { message: "Please increase the number of rooms" }, status: :ok
       elsif @rooms == value
         render json: { price: @price * @nights }, status: :ok
       else
@@ -100,7 +99,7 @@ class BookingController < ApplicationController
           end
           render json: { price: @price * @nights }, status: :ok
         else
-          render json: { message: "frege" }, status: :ok
+          render json: { message: "Please increase the number of adults" }, status: :ok
         end
       end
 

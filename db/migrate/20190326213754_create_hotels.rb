@@ -6,7 +6,7 @@ class CreateHotels < ActiveRecord::Migration[5.2]
       t.string :hotel_lat, null: false, default: ""
       t.string :hotel_long, null: false, default: ""
       t.string :hotel_price, null: false, default: ""
-      t.string :hotel_netprice, null: false, default: ""
+      t.string :hotel_discount, null: false, default: ""
       t.string :hotel_rating, null: false, default: ""
       t.string :hotel_rooms, null: false, default: ""
       t.jsonb :hotel_images, null: false, default: ""

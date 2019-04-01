@@ -18,12 +18,19 @@ ActiveRecord::Schema.define(version: 2019_03_26_214216) do
   create_table "bookings", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "hotel_id", null: false
+    t.string "booking_id", default: "", null: false
     t.string "booking_startdate", default: "", null: false
     t.string "booking_enddate", default: "", null: false
+    t.string "booking_nights", default: "", null: false
     t.string "booking_cprice", default: "", null: false
     t.string "booking_adults", default: "", null: false
     t.string "booking_children", default: "", null: false
     t.string "booking_rooms", default: "", null: false
+    t.string "booking_hotel_name", default: "", null: false
+    t.string "booking_hotel_loc", default: "", null: false
+    t.string "booking_hotel_lat", default: "", null: false
+    t.string "booking_hotel_long", default: "", null: false
+    t.string "booking_hotel_picture", default: "", null: false
     t.string "booking_username", default: "", null: false
     t.string "booking_useremail", default: "", null: false
     t.datetime "deleted_at"

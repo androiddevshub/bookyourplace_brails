@@ -66,7 +66,7 @@ Hotel.create(hotel_name: "Travelodge London Kingston Upon Thames",
             hotel_price: "87",
             hotel_discount: "30",
             hotel_rating: "4.8",
-            hotel_rooms: ""10,
+            hotel_rooms: "10",
             hotel_images: parsed_3)
 
 

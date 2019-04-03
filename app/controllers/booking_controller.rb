@@ -88,18 +88,18 @@ class BookingController < ApplicationController
         @price = @price + (@children - value) * (30 * hotel.hotel_price.to_i)/100
       end
       if @rooms < value
-        render json: { message: "Please increase the number of rooms" }, status: :ok
+        render json: { message: "Please increase the number of rooms", code: 1 }, status: :ok
       elsif @rooms == value
-        render json: { message: @price * @nights }, status: :ok
+        render json: { message: @price * @nights , code: 0}, status: :ok
       else
         if @rooms <= @adults && @rooms > value
           @price = @rooms * hotel.hotel_price.to_i
           if @children >= @rooms
             @price = @price + (@children - @rooms) * (30 * hotel.hotel_price.to_i)/100
           end
-          render json: { message: @price * @nights }, status: :ok
+          render json: { message: @price * @nights, code: 0 }, status: :ok
         else
-          render json: { message: "Please increase the number of adults" }, status: :ok
+          render json: { message: "Please increase the number of adults", code: 2 }, status: :ok
         end
       end
 

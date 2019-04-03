@@ -32,7 +32,7 @@ class BookingController < ApplicationController
   def index
     user = User.find_by(session_id: request.headers['session-id'])
     if user.present?
-      bookings = Booking.all.where(deleted_at: nil)
+      bookings = Booking.all.where(deleted_at: nil, user_id: user.id)
       if bookings.present?
         render json: { data: bookings }, status: :ok
       else

@@ -11,7 +11,7 @@ class VerifyController < ApplicationController
             render json: { message: user.errors.full_messages }, status: :bad_request
           end
         else
-          
+
           render json: { message: user.errors.full_messages }, status: :bad_request
         end
       else
@@ -20,8 +20,20 @@ class VerifyController < ApplicationController
     else
       render json: { message: 'No user found' }, status: :bad_request
     end
+  end
 
-
+  def destroy_user
+    user = User.find_by(session_id: request.headers['session-id'])
+    if user.present?
+      user.session_id = nil
+      if user.save
+        render json: { message: 'Logged out' }, status: :ok
+      else
+        render json: {errors: 'Something went wrong'}, status: :bad_request
+      end
+    else
+      render json: { errors: 'Invalid session id' }, status: :bad_request
+    end
   end
 
 end

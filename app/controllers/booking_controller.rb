@@ -20,7 +20,7 @@ class BookingController < ApplicationController
          booking_username: params[:name],
          booking_useremail: params[:email])
       if booking.save
-        render json: { message: "Booking created" }, status: :ok
+        render json: { message: "Booking created", id: booking.id }, status: :ok
       else
         render json: { errors: 'Something went wrong!' }, status: :bad_request
       end

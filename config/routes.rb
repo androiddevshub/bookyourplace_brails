@@ -4,7 +4,7 @@ Rails.application.routes.draw do
                                     passwords: 'passwords'}
 
   post 'api/user_verify', to: 'verify#verify_user'
-  post 'api/sign_out', to: 'verify#destroy_user'
+  delete 'api/sign_out', to: 'verify#destroy_user'
   get 'api/places', to: 'place#show'
   get 'api/hotels', to: 'hotel#index'
   get 'api/hotel/:id', to: 'hotel#show'

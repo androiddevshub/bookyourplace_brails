@@ -3,9 +3,9 @@ class HotelController < ApplicationController
   def index
     user = User.find_by(session_id: request.headers['session-id'])
     if user.present?
-      render json: { data: Hotel.all }
+      render json: { data: Hotel.all }, status: :ok
     else
-      render json: { data: 'Invalid session id' }
+      render json: { data: 'Invalid session id' }, status: :bad_request
     end
   end
 
@@ -19,7 +19,7 @@ class HotelController < ApplicationController
         render json: { errors: 'No hotel with this id' }, status: :bad_request
       end
     else
-      render json: { data: 'Invalid session id' }
+      render json: { data: 'Invalid session id' }, status: :bad_request
     end
   end
 

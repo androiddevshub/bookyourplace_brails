@@ -64,7 +64,7 @@ class BookingController < ApplicationController
       booking = Booking.find_by(id: params[:id])
       if booking.present?
         if booking.update(deleted_at: Time.now)
-          render json: { message: "Booking deleted" }, status: :bad_request
+          render json: { message: "Booking deleted" }, status: :ok
         end
       else
         render json: { errors: 'No booking with this id' }, status: :bad_request

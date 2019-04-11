@@ -1,4 +1,5 @@
 class BookingController < ApplicationController
+# Controller for creating booking and viewing bookings
 
   def create
     user = User.find_by(session_id: request.headers['session-id'])

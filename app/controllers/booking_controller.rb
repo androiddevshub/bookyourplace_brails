@@ -108,5 +108,5 @@ class BookingController < ApplicationController
       render json: { errors: 'Invalid session id' }, status: :bad_request
     end
   end
-
+#Hello world
 end
